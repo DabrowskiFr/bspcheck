@@ -6,22 +6,27 @@ int h (int * x, int y){
 }
 
 int g(int x){
-  return pid();
+  int y;
+  if (pid()){
+    y = h(&x, pid());
+    return x;
+  }
+  else return pid();
 }
 
 int f(){
-  int x = 0;
-  int y;
-  int z;
-  int t;
-  int u;
-  t = pid();
-  u = t;
-  if (pid()){ x = x + 2;}
-  y = h(&x, pid());
-  z = g(1);
-  
-  return y;
+  int x = 0, t, u;
+  if (pid()){
+    if (g(1)){
+      x = 2;
+      x = x + 2;
+    }
+  }
+  h(&x, pid());
+  if (x) x=x+1; else x=x+1;
+       
+  // Should also say which dependences prevent textual alignement
+  return x;
 }
 
 int main(){
