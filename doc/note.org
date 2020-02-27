@@ -1,0 +1,77 @@
+Plugin name BSPCheck
+Plugin interface BSPCheck.mli
+
+Plugin files : bspcheck_run.ml
+
+Load plugin : frama-c -load-script bspcheck_run.ml -bspcheck
+
+
+compile plugin : make
+
+install plugin : make install
+then test plugin : frama-c -bspcheck
+
+
+Globals
+
+Globals.Functions.find_def_by_name "f" : return a fundec
+Globals.Functions.get fdec.Cil_types.svar 
+where (fdec : fundec) returns kernel_function 
+
+
+PDG plugin
+
+pdg of a function
+
+Db.Pdg.get : Cil_types.kernel_function -> PdgTypes.Pdg.t
+
+Db.Pdg.find_entry_point_node
+
+Db.Pdg.pretty_node
+Db.Pdg.pretty_node
+
+Db.Pdg.iter_nodes
+
+
+type stmt = {
+  mutable labels : Cil_types.label list;
+  mutable skind : Cil_types.stmtkind;
+  mutable sid : int;
+  mutable succs : Cil_types.stmt list;
+  mutable preds : Cil_types.stmt list;
+  mutable ghost : bool;
+  mutable sattr : Cil_types.attributes;
+}
+
+type stmtkind =
+    Instr of Cil_types.instr
+  | Return of Cil_types.exp option * Cil_types.location
+  | Goto of Cil_types.stmt ref * Cil_types.location
+  | Break of Cil_types.location
+  | Continue of Cil_types.location
+  | If of Cil_types.exp * Cil_types.block * Cil_types.block *
+      Cil_types.location
+  | Switch of Cil_types.exp * Cil_types.block * Cil_types.stmt list *
+      Cil_types.location
+  | Loop of Cil_types.code_annotation list * Cil_types.block *
+      Cil_types.location * Cil_types.stmt option * Cil_types.stmt option
+  | Block of Cil_types.block
+  | UnspecifiedSequence of
+      (Cil_types.stmt * Cil_types.lval list * Cil_types.lval list *
+       Cil_types.lval list * Cil_types.stmt ref list)
+      list
+  | Throw of (Cil_types.exp * Cil_types.typ) option * Cil_types.location
+  | TryCatch of Cil_types.block *
+      (Cil_types.catch_binder * Cil_types.block) list * Cil_types.location
+  | TryFinally of Cil_types.block * Cil_types.block * Cil_types.location
+  | TryExcept of Cil_types.block * (Cil_types.instr list * Cil_types.exp) *
+      Cil_types.block * Cil_types.location
+
+
+For non calls statements (calls have several nodes)
+val find_stmt_node : PdgTypes.Pdg.t -> Cil_types.stmt -> PdgTypes.Node.t
+
+val find_simple_stmt_nodes : PdgTypes.Pdg.t -> Cil_types.stmt -> PdgTypes.Node.t list
+
+Returns nodes on which a node depends
+Db.Pdg.all_dpds pdg
