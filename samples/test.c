@@ -2,7 +2,7 @@ int pid();
 
 int h (int * x, int y){
   *x = y;
-  return 1;
+  return x;
 }
 
 int g(int x){
@@ -15,7 +15,7 @@ int g(int x){
 }
 
 int f(){
-  int x = 0, t, u;
+  int x = 0;
   if (pid()){
     if (g(1)){
       x = 2;
@@ -24,9 +24,8 @@ int f(){
   }
   h(&x, pid());
   if (x) x=x+1; else x=x+1;
-       
   // Should also say which dependences prevent textual alignement
-  return x;
+  return x+1;
 }
 
 int main(){
