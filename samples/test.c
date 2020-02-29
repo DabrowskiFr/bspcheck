@@ -1,33 +1,34 @@
-int pid();
+int bsp_pid();
 
 int h (int * x, int y){
   *x = y;
-  return x;
+  return 1;
 }
 
-int g(int x){
-  int y;
-  if (pid()){
-    y = h(&x, pid());
-    return x;
+
+
+int g(){
+  int x;
+  h(&x, bsp_pid());
+  if (x){
+    return bsp_pid();
   }
-  else return pid();
+  else return 0;
 }
 
 int f(){
   int x = 0;
-  if (pid()){
-    if (g(1)){
+  if (g()){
       x = 2;
       x = x + 2;
-    }
   }
-  h(&x, pid());
-  if (x) x=x+1; else x=x+1;
-  // Should also say which dependences prevent textual alignement
-  return x+1;
+  return x;
 }
 
 int main(){
-  return f();
+  int x = f();
+
+  if (x) return 1;
+  else return 2;
+
 }

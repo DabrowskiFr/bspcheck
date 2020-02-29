@@ -53,7 +53,7 @@ let run () =
   let fmt = Format.formatter_of_out_channel chan in
   let ast = Ast.get() in
   let outnodes = Hashtbl.create 50 in
-  Hashtbl.add outnodes "pid" [(match PdgIndex.Key.output_key with SigKey s -> s)];
+  Hashtbl.add outnodes "bsp_pid" [(match PdgIndex.Key.output_key with SigKey s -> s)];
   let o = new compute_pdgs Format.std_formatter in
   Visitor.visitFramacFileSameGlobals (o : compute_pdgs :> Visitor.frama_c_inplace) ast;
   let r = ref true in
@@ -63,7 +63,7 @@ let run () =
       ast;
     r := o2#continue ()
   done;
-  let o' = new PidDependent.compute_pid_dep Format.std_formatter (o#pdgs ()) in 
+  let o' = new PidDependent.compute_pid_dep Format.std_formatter (o#pdgs ()) outnodes in 
   Visitor.visitFramacFileSameGlobals (o' : PidDependent.compute_pid_dep :> Visitor.frama_c_inplace) ast;
   Visitor.visitFramacFileSameGlobals (new XCFG.print_cfg fmt (o'#sids ())) ast;
   close_out chan
