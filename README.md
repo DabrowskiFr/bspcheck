@@ -24,6 +24,8 @@ To produce the graph
 
 dot -Tpdf cfg.dot -o cfg.pdf
 
+![Alt text](samples/sample.jpg?raw=false "Title")
+
 ## References 
 
 Safe Usage of Registers in BSPlib
