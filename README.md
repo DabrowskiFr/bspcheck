@@ -22,7 +22,7 @@ frama-c -bspcheck <C file>
 
 To produce the graph
 
-dot -Pdf cfg.dot -o cfg.pdf
+dot -Tpdf cfg.dot -o cfg.pdf
 
 ## References 
 
