@@ -40,10 +40,6 @@ A denotational semantics of textually aligned SPMD Program
 Journal of Logical and Algebraic Methods in Programming, Elsevier, In press
 Frederic Dabrowski,
 
-A Denotational Semantics of Textually Aligned SPMD Programs
-International Symposium on Formal Approaches to Parallel and Distributed Systems (4PAD 2018), Jul 2018, Orléans, France
-Frédéric Dabrowski,
-
 Textual Alignment in SPMD Programs
 SAC '18: Proceedings of the 33rd Annual ACM Symposium on Applied Computing, Apr 2018, Pau, France
 Frederic Dabrowski,
