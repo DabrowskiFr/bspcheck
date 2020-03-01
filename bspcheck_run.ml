@@ -41,6 +41,7 @@ class compute_pdgs out =
         Cfg.prepareCFG f;
         (* pre-compute all pdgs graphs and store them in a hashtable *)
         Hashtbl.add pdgs f.svar.vname (!Db.Pdg.get (Globals.Functions.get f.svar));
+        Format.fprintf out "Compute pdg %s\n" f.svar.vname;
         Cil.DoChildren
         (* Cil.SkipChildren *)
       | _ -> Cil.SkipChildren
